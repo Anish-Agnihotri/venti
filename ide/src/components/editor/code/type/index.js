@@ -13,32 +13,22 @@ import "ace-builds/src-min-noconflict/ext-language_tools";
 import '../../../../utils/mode-solidity';
 import '../../../../utils/theme-solidity';
 
+// Import store
+import Store from '../../../../stores/files';
+
 class Type extends React.Component {
-	constructor() {
-		super();
-
-		this.cursorMovement = this.cursorMovement.bind(this);
-	}
-
-	// Editor cursor movements.
-	cursorMovement() {
-		var rowPos = this.refs.aceEditor.editor.getCursorPosition().row + 1
-		var colPos = this.refs.aceEditor.editor.getCursorPosition().column
-		// Figure out how to save without setState
-	};
-
-	render() {
+	render(props) {
+		let store = this.props.store;
 		return(
 			<div className="type">
 				<AceEditor
 					mode="solidity"
 					theme="solidity"
-					onChange={this.onChange}
+					value={store.get('files')[this.props.position]["code"]}
 					name="solidity-editor"
 					enableBasicAutocompletion={true}
 					enableLiveAutocompletion={true}
 					editorProps={{ $blockScrolling: true }}
-					onCursorChange={this.cursorMovement}
 					style={{lineHeight: 1.75}}
 					ref='aceEditor'
 				/>
@@ -56,4 +46,4 @@ class Type extends React.Component {
 	}
 }
 
-export default Type;
+export default Store.withStore(Type);

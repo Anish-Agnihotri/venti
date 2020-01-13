@@ -26,7 +26,6 @@
 
 .op-buttons > button {
 	display: inline-block;
-	transform: translateY(-2.5px);
 	background-color: rgb(45, 49, 61);
 	border: none;
 	color: #606a85;
@@ -44,7 +43,6 @@
 	font-size: 13px;
 	display: inline-block;
 	width: 100px;
-	transform: translateY(-3px);
 	text-align: right;
 }
 

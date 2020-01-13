@@ -5,15 +5,23 @@
 	height: 100vh;
 }
 
+.layout-code > ul {
+	border-bottom: 1px solid rgb(62, 68, 85);
+	margin-bottom: 0px;
+}
+
+.layout-code > ul > li {
+	border-radius: 0px;
+	border: none;
+	bottom: 0px;
+	color: rgb(123, 126, 139);
+	padding: 6px 20px 6px 20px;
+}
+
+.react-tabs__tab--selected {
+	background-color: rgb(62, 68, 85) !important;
+}
+
 .layout-code > div {
-	width: 100%;
-	display: inline-block;
-}
-
-.layout-code > div:nth-child(1) {
-	height: 30px;
-}
-
-.layout-code > div:nth-child(2) {
-	height: calc(100vh - 30px);
+	height: calc(100vh - 33px);
 }
