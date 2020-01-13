@@ -17,6 +17,15 @@ import '../../../../utils/theme-solidity';
 import Store from '../../../../stores/files';
 
 class Type extends React.Component {
+	constructor() {
+		super();
+
+		this.handleCodeChange = this.handleCodeChange.bind(this);
+	}
+	handleCodeChange(newValue) {
+		this.props.store.get('files')[this.props.position]["code"] = newValue;
+		this.props.store.set('files')(this.props.store.get('files'))
+	}
 	render(props) {
 		let store = this.props.store;
 		return(
@@ -24,6 +33,7 @@ class Type extends React.Component {
 				<AceEditor
 					mode="solidity"
 					theme="solidity"
+					onChange={this.handleCodeChange}
 					value={store.get('files')[this.props.position]["code"]}
 					name="solidity-editor"
 					enableBasicAutocompletion={true}
