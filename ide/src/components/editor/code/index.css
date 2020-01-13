@@ -18,10 +18,30 @@
 	padding: 6px 20px 6px 20px;
 }
 
-.react-tabs__tab--selected {
+/* TODO: Fix selected tab color */
+.selected-tab {
 	background-color: rgb(62, 68, 85) !important;
 }
 
 .layout-code > div {
 	height: calc(100vh - 33px);
+}
+
+.tab-button {
+	margin-left: 10px;
+	background-color: rgb(70, 77, 95);
+	border: none;
+	padding: 1px 4px 1.5px 4px;
+	border-radius: 50%;
+	transform: translateY(-0.5px);
+	transition: 100ms ease-in-out;
+}
+
+.tab-button:hover {
+	background-color: rgb(105, 116, 143);
+}
+
+.react-tabs__tab {
+	text-align: left;
+	padding: 6px 10px 6px 15px !important;
 }

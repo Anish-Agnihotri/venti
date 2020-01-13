@@ -16,14 +16,26 @@ import '../../../../utils/theme-solidity';
 // Import store
 import Store from '../../../../stores/files';
 
+// TODO: Save editor state
+
 class Type extends React.Component {
 	constructor() {
 		super();
 
 		this.handleCodeChange = this.handleCodeChange.bind(this);
+		this.handleCursorChange = this.handleCursorChange.bind(this);
 	}
 	handleCodeChange(newValue) {
 		this.props.store.get('files')[this.props.position]["code"] = newValue;
+		this.props.store.set('files')(this.props.store.get('files'))
+	}
+	handleCursorChange() {
+		var selection = this.refs.aceEditor.editor.getSelectionRange().end;
+		var row = selection.row;
+		var col = selection.column;
+
+		this.props.store.get('files')[this.props.position]["row"] = row + 1;
+		this.props.store.get('files')[this.props.position]["col"] = col;
 		this.props.store.set('files')(this.props.store.get('files'))
 	}
 	render(props) {
@@ -38,6 +50,7 @@ class Type extends React.Component {
 					name="solidity-editor"
 					enableBasicAutocompletion={true}
 					enableLiveAutocompletion={true}
+					onCursorChange={this.handleCursorChange}
 					editorProps={{ $blockScrolling: true }}
 					style={{lineHeight: 1.75}}
 					ref='aceEditor'
@@ -48,7 +61,7 @@ class Type extends React.Component {
 						<button onClick={() => {this.refs.aceEditor.editor.redo()}}><i className="fa fa-repeat"></i></button>
 					</div>
 					<span>
-						Solidity (Venti)
+						{store.get('files')[this.props.position]["row"] !== undefined ? `Ln ${store.get('files')[this.props.position]["row"]}, Col ${store.get('files')[this.props.position]["col"]} | Solidity (Venti)` : 'Solidity (Venti)'}
 					</span>
 				</div>
 			</div>

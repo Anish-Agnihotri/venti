@@ -20,6 +20,9 @@ class CreateFile extends React.Component {
 	onSubmit() {
 		this.props.store.get('files').push({"name": this.state.name, "code": "", "shown": true});
 		this.props.store.set('files')(this.props.store.get('files'));
+
+		this.props.store.get('tabMgmt')[0] += 1;
+		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 		this.props.closeModal();
 	}
 	render() {

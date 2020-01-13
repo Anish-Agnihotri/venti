@@ -11,6 +11,24 @@
 
 .explorer-item {
 	height: 50px;
+	transition: 100ms ease-in-out;
+}
+
+.explorer-item:first-child {
+	border-radius: 5px 5px 0px 0px;
+}
+
+.explorer-item:last-child {
+	border-radius: 0px 0px 5px 5px;
+}
+
+.explorer-item:hover {
+	background-color: #EEF0F9;
+}
+
+.explorer-item-status {
+	color: rgb(175, 175, 175);
+	font-weight: 400;
 }
 
 .explorer-item > div {
@@ -56,4 +74,8 @@
 .explorer-modal {
 	border-radius: 5px;
 	width: 500px;
+}
+
+.react-tabs__tab--selected {
+	background-color: rgb(47, 51, 65) !important;
 }

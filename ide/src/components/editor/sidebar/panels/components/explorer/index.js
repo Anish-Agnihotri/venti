@@ -5,6 +5,8 @@ import Modal from 'react-responsive-modal';
 
 import CreateFile from './modals/CreateFile';
 
+// TODO: Fix open on click
+
 class Explorer extends React.Component {
 	constructor() {
 		super();
@@ -36,7 +38,7 @@ class Explorer extends React.Component {
 			<div>
 				<div className="explorer">
 					{store.get('files').map(function(d, idx) {
-						return <ExplorerItem key={idx} position={idx} name={d.name} store={store}/>
+						return <ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown}/>
 					})}
 				</div>
 				<CreateFileButton onClick={this.openModal}/>
@@ -57,11 +59,23 @@ class Explorer extends React.Component {
 }
 
 class ExplorerItem extends React.Component {
+	constructor() {
+		super();
+
+		this.selectItem = this.selectItem.bind(this);
+	}
+	selectItem() {
+		this.props.store.get('files')[this.props.position]["shown"] = true;
+		this.props.store.set('files')(this.props.store.get('files'))
+
+		this.props.store.get('tabMgmt')[0] = this.props.position
+		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
+	}
 	render(props) {
 		return(
-			<div className="explorer-item">
+			<div className="explorer-item" onClick={this.selectItem}>
 				<div>
-					<span>{this.props.name}</span>
+					<span>{this.props.name}<span className="explorer-item-status">{this.props.isShown ? ' (open)' : ''}</span></span>
 				</div>
 				<div>
 					<button><i className="fa fa-trash"></i></button>
