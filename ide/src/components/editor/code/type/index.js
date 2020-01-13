@@ -16,7 +16,7 @@ import '../../../../utils/theme-solidity';
 // Import store
 import Store from '../../../../stores/files';
 
-// TODO: Save editor state
+// TODO: Save editor state and full refactor
 
 class Type extends React.Component {
 	constructor() {

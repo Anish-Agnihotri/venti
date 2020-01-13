@@ -11,17 +11,19 @@ class Code extends React.Component {
 		super();
 
 		this.state = {
-			tabIndex: 0
+			tabIndex: 0 // Initialize default tabIndex
 		}
 
 		this.updateIndex = this.updateIndex.bind(this);
 	}
+	// Update tabIndex
 	updateIndex(index) {
 		this.props.store.get('tabMgmt')[0] = index
 		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 	}
 	render() {
 		let store = this.props.store;
+		// Setup functionality to close tabs
 		function closeTab(position) {
 			store.get('files')[position]["shown"] = false;
 			store.set('files')(store.get('files'))
@@ -57,5 +59,3 @@ class Code extends React.Component {
 }
 
 export default Store.withStore(Code);
-
-// <Tab key={idx}>{d.name}</Tab>

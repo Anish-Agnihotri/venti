@@ -1,4 +1,6 @@
 import React from 'react';
+
+// Split layout
 import Sidebar from '../../components/editor/sidebar';
 import Code from '../../components/editor/code';
 

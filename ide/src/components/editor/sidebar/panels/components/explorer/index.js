@@ -3,6 +3,7 @@ import './index.css';
 import Store from '../../../../../../stores/files';
 import Modal from 'react-responsive-modal';
 
+// Import modals
 import CreateFile from './modals/CreateFile';
 
 // TODO: Fix open on click
@@ -12,36 +13,44 @@ class Explorer extends React.Component {
 		super();
 
 		this.state = {
-			modalOpen: false,
-			modalContent: 0
+			modalOpen: false, // Default position of modal opened to false
+			modalContent: 0 // Default dynamically rendered modal content to 0
 		}
 
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 	}
 
+	// Open modal
 	openModal() {
 		this.setState({ modalOpen: true})
 	}
 
+	// Close modal
 	closeModal() {
 		this.setState({ modalOpen: false, modalContent: 0 })
 	}
+
+	// Dynamically render modal content
 	renderModal() {
 		if (this.state.modalContent === 0) {
 			return <CreateFile closeModal={this.closeModal}/>
 		}
 	}
 	render() {
-		let store = this.props.store;
+		let store = this.props.store; // Setup easy access to store
+
 		return(
 			<div>
 				<div className="explorer">
+					{/* For each file in files, render an ExplorerItem */}
 					{store.get('files').map(function(d, idx) {
 						return <ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown}/>
 					})}
 				</div>
+				{/* Create File Button */}
 				<CreateFileButton onClick={this.openModal}/>
+				{/* Render modal */}
 				<Modal 
 					open={this.state.modalOpen}
 					onClose={this.closeModal}
@@ -51,6 +60,7 @@ class Explorer extends React.Component {
 					}}
 					center
 				>
+					{/* Dynamically render modal content */}
 					{this.renderModal()}
 				</Modal>
 			</div>
@@ -64,12 +74,18 @@ class ExplorerItem extends React.Component {
 
 		this.selectItem = this.selectItem.bind(this);
 	}
+	// selectItem changes shown to true, and changes the tab focus
 	selectItem() {
-		this.props.store.get('files')[this.props.position]["shown"] = true;
-		this.props.store.set('files')(this.props.store.get('files'))
+		let store = this.props.store
+		let itemPosition = this.props.position
 
-		this.props.store.get('tabMgmt')[0] = this.props.position
-		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
+		// Set item to shown
+		store.get('files')[itemPosition]["shown"] = true;
+		store.set('files')(store.get('files'))
+
+		// Change tab position globally to selected item
+		store.get('tabMgmt')[0] = itemPosition
+		store.set('tabMgmt')(store.get('tabMgmt'))
 	}
 	render(props) {
 		return(

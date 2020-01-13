@@ -1,6 +1,8 @@
 import React from 'react';
 import Store from '../../../../../../../stores/files';
 
+/* TODO: Refactor */
+
 class CreateFile extends React.Component {
 	constructor() {
 		super();

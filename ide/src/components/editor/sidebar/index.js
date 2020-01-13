@@ -1,23 +1,22 @@
 import React from 'react';
 import './index.css';
 
+// Import Venti logo
 import logo from './logo.svg';
 
-import solidity from './menu/solidity.png';
-import solidityblue from './menu/solidity-blue.png';
+// Import sidebar buttons
+import solidity from './images/solidity.png';
+import solidityblue from './images/solidity-blue.png';
+import settings from './images/settings.png';
+import settingsblue from './images/settings-blue.png';
+import bug from './images/bug.png';
+import bugblue from './images/bug-blue.png';
+import transaction from './images/transaction.png';
+import transactionblue from './images/transaction-blue.png';
+import document from './images/document.png';
+import documentblue from './images/document-blue.png';
 
-import settings from './menu/settings.png';
-import settingsblue from './menu/settings-blue.png';
-
-import bug from './menu/bug.png';
-import bugblue from './menu/bug-blue.png';
-
-import transaction from './menu/transaction.png';
-import transactionblue from './menu/transaction-blue.png';
-
-import document from './menu/document.png';
-import documentblue from './menu/document-blue.png';
-
+// Import sub sidebar panels
 import Browser from './panels/browser';
 import Bugs from './panels/bugs';
 import Settings from './panels/settings';
@@ -31,16 +30,18 @@ class Sidebar extends React.Component {
 		super();
 
 		this.state = {
-			panel: 1 // change default on deploy
+			panel: 2 // Setup default panel to display ("Solidity Compiler")
 		}
 
 		this.updatePanel = this.updatePanel.bind(this);
 	}
+	// Update panel on click
 	updatePanel(num) {
 		this.setState({
 			panel: num
 		})
 	}
+	// Dynamically render panel component
 	renderPanel() {
 		switch(this.state.panel) {
 			case 1:
