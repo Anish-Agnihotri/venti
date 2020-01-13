@@ -1,11 +1,14 @@
 import React from 'react';
-import './App.css';
+
+import './index.css';
+
+
+
+import Editor from './pages/editor';
 
 function App() {
   return (
-    <div className="App">
-      <p>Hello Venti!</p>
-    </div>
+      <Editor />
   );
 }
 

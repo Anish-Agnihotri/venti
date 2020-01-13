@@ -1,0 +1,19 @@
+.layout-code {
+	background-color: #1D2028;
+	float: left;
+	width: calc(100vw - 370px);
+	height: 100vh;
+}
+
+.layout-code > div {
+	width: 100%;
+	display: inline-block;
+}
+
+.layout-code > div:nth-child(1) {
+	height: 30px;
+}
+
+.layout-code > div:nth-child(2) {
+	height: calc(100vh - 30px);
+}

@@ -1,0 +1,114 @@
+/* Overall sidebar setup */
+.layout-sidebar {
+	float: left;
+	width: 370px;
+	height: 100vh;
+}
+
+.layout-sidebar > div {
+	display: inline-block;
+	height: calc(100% - 20px);
+	padding-top: 20px;
+	vertical-align: top;
+}
+
+/* Layout navigation setup */
+.layout-nav {
+	background-color: #EEF0F9;
+	width: 70px;
+}
+
+.layout-nav-logo {
+	height: 80px;
+}
+
+.layout-nav-logo > button {
+	border: none;
+	background-color: transparent;
+	width: 100%;
+	height: 100%;
+	transition: 150ms ease-in-out;
+}
+
+.layout-nav-logo > button:hover {
+	opacity: 0.8;
+}
+
+.layout-nav-logo > button > img {
+	margin-top: 7.5px;
+	transition: 150ms ease-in-out;
+}
+
+.layout-nav-selectors {
+	height: calc(100vh - 165px);
+	padding-top: 40px;
+}
+
+.layout-nav-selectors > ul {
+	list-style-type: none;
+	text-align: center;
+	padding: 0px;
+}
+
+.layout-nav-selectors > ul > li {
+	text-align: left;
+	padding: 5px 0px 5px 0px;
+}
+
+.layout-nav-selectors > ul > li > button {
+	background-color: transparent;
+	border: none;
+	width: calc(100% - 2px);
+	border-right: 2.5px solid transparent;
+	transition: 100ms ease-in-out;
+	height: 50px;
+}
+
+.layout-nav-selectors > ul > li > button:hover {
+	border-color: #1416F6;
+}
+
+.layout-nav-selectors > ul > li > button > img {
+	padding-left: 2px;
+}
+
+/* Custom sizing for images */
+.layout-nav-selectors > ul > li:nth-child(1) > button > img {
+	width: 23px;
+	margin-top: 4px;
+	padding-left: 4px;
+}
+.layout-nav-selectors > ul > li:nth-child(2) > button > img {
+	width: 23px;
+	margin-top: 3px;
+}
+.layout-nav-selectors > ul > li:nth-child(3) > button > img {
+	width: 20px;
+	padding-top: 4px;
+}
+.layout-nav-selectors > ul > li:nth-child(4) > button > img {
+	width: 25.5px;
+	padding-top: 3.5px;
+}
+.layout-nav-selectors > ul > li:nth-child(5) > button > img {
+	width: 25px;
+	padding-top: 4px;
+}
+
+.active {
+	border-color: #1416F6 !important;
+}
+
+.layout-version {
+	height: 15px;
+	font-size: 12.5px;
+	text-align: center;
+	color: rgb(157, 158, 163);
+}
+
+/* Layout panel setup */
+.layout-panel {
+	background-color: #FBFBFD;
+	width: 270px;
+	padding: 0px 12.5px 0px 12.5px;
+}
