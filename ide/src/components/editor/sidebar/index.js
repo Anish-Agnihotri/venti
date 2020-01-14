@@ -30,7 +30,8 @@ class Sidebar extends React.Component {
 		super();
 
 		this.state = {
-			panel: 2 // Setup default panel to display ("Solidity Compiler")
+			panel: 1 // Setup default panel to display ("Solidity Compiler")
+			// FIXME: Change to 2 before production deploy
 		}
 
 		this.updatePanel = this.updatePanel.bind(this);

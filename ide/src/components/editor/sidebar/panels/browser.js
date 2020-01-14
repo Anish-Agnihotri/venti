@@ -9,7 +9,6 @@ export default class Browser extends React.Component {
 			<div>
 				<div className="panel-header">
 					<span>File Browser</span>
-					<p>Create, import, or save Solidity files.</p>
 				</div>
 				<Explorer />
 			</div>

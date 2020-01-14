@@ -41,7 +41,7 @@ class Explorer extends React.Component {
 		let store = this.props.store; // Setup easy access to store
 
 		return(
-			<div>
+			<div className="browser-container">
 				<div className="explorer">
 					{/* For each file in files, render an ExplorerItem */}
 					{store.get('files').map(function(d, idx) {
@@ -49,7 +49,11 @@ class Explorer extends React.Component {
 					})}
 				</div>
 				{/* Create File Button */}
-				<CreateFileButton onClick={this.openModal}/>
+				<div className="explorer-bottom">
+					<CreateFileButton onClick={this.openModal}/>
+					<LocalFileButton />
+					<SaveAllGistButton />
+				</div>
 				{/* Render modal */}
 				<Modal 
 					open={this.state.modalOpen}
@@ -63,6 +67,7 @@ class Explorer extends React.Component {
 					{/* Dynamically render modal content */}
 					{this.renderModal()}
 				</Modal>
+
 			</div>
 		)
 	}
@@ -74,19 +79,38 @@ class ExplorerItem extends React.Component {
 
 		this.selectItem = this.selectItem.bind(this);
 	}
-	// selectItem changes shown to true, and changes the tab focus
+
+	// selectItem functionality
 	selectItem() {
+		// Basic declerations
 		let store = this.props.store
 		let itemPosition = this.props.position
 
-		// Set item to shown
-		store.get('files')[itemPosition]["shown"] = true;
-		store.set('files')(store.get('files'))
+		// If not already shown
+		if (store.get('files')[itemPosition]["shown"] === false) {
+			
+			// Set current item to shown, rendering its tab instantly.
+			store.get('files')[itemPosition]["shown"] = true;
+			store.set('files')(store.get('files'))
+			
+			// Filter through all tabs that show, find position, and set it to current index.
+			var tempFilter = store.get('files').filter(function(item) {
+				return !item["shown"] === false
+			})
 
-		// Change tab position globally to selected item
-		store.get('tabMgmt')[0] = itemPosition
-		store.set('tabMgmt')(store.get('tabMgmt'))
+			// Find name of this item in new filtered array, tab position, and set to focus.
+			store.get('tabMgmt')[0] = tempFilter.findIndex(x => x.name === this.props.name);
+			store.set('tabMgmt')(store.get('tabMgmt'))
+		} else { // If already shown
+			var tempFilterTwo = store.get('files').filter(function(item) {
+				return !item["shown"] === false
+			})
+
+			store.get('tabMgmt')[0] = tempFilterTwo.findIndex(x => x.name === this.props.name);
+			store.set('tabMgmt')(store.get('tabMgmt'))
+		}
 	}
+
 	render(props) {
 		return(
 			<div className="explorer-item" onClick={this.selectItem}>
@@ -105,8 +129,28 @@ class ExplorerItem extends React.Component {
 class CreateFileButton extends React.Component {
 	render() {
 		return(
-			<button onClick={this.props.onClick} className="button-blue create-file-button">
+			<button onClick={this.props.onClick} className="button-blue">
 				<span>Create new file</span>
+			</button>
+		)
+	}
+}
+
+class LocalFileButton extends React.Component {
+	render() {
+		return(
+			<button className="button-blue">
+				<span>Upload file</span>
+			</button>
+		)
+	}
+}
+
+class SaveAllGistButton extends React.Component {
+	render() {
+		return(
+			<button className="button-blue">
+				<span>Gist save all</span>
 			</button>
 		)
 	}

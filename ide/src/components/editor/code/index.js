@@ -7,29 +7,35 @@ import Store from '../../../stores/files';
 import Type from './type';
 
 class Code extends React.Component {
-	constructor() {
-		super();
-
-		this.state = {
-			tabIndex: 0 // Initialize default tabIndex
-		}
-
-		this.updateIndex = this.updateIndex.bind(this);
-	}
-	// Update tabIndex
-	updateIndex(index) {
-		this.props.store.get('tabMgmt')[0] = index
-		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
-	}
 	render() {
 		let store = this.props.store;
+
+		// Update tab index
+		function updateIndex(index) {
+			// Filter for shown items
+			var tempFilter = store.get('files').filter(function(item) {
+				return !item["shown"] === false
+			})
+			
+			// Set a new shown item
+			store.get('tabMgmt')[0] = index;
+			store.set('tabMgmt')(store.get('tabMgmt'))
+
+			// If the indices match (they shouldn't since one is 0-based and another 1-based)
+			if (index === tempFilter.length) {
+				store.get('tabMgmt')[0] = index - 1; // Simply shift index -1 
+				store.set('tabMgmt')(store.get('tabMgmt'))
+			}
+		}
+
 		// Setup functionality to close tabs
 		function closeTab(position) {
 			store.get('files')[position]["shown"] = false;
-			store.set('files')(store.get('files'))
+			store.set('files')(store.get('files'));
 		}
+
 		return(
-			<Tabs className="layout-code" selectedIndex={store.get('tabMgmt')[0]} onSelect={tabIndex => this.updateIndex(tabIndex)}>
+			<Tabs className="layout-code" selectedIndex={store.get('tabMgmt')[0]} onSelect={tabIndex => updateIndex(tabIndex)}>
 				<TabList>
 					{store.get('files').map(function(d, idx) {
 						if (d.shown === true) {
