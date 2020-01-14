@@ -60,23 +60,8 @@
 }
 
 .explorer-item > div:nth-child(1) {
-	width: calc(80% - 10px);
+	width: calc(100% - 10px);
 	padding-left: 10px;
-}
-
-.explorer-item > div:nth-child(2) {
-	width: 20%;
-}
-
-.explorer-item > div:nth-child(2) > button {
-	background-color: transparent;
-	border: none;
-	display: inline-block;
-	margin-top: 15px;
-}
-
-.explorer-item > div:nth-child(2) > button > i {
-	font-size: 15px;
 }
 
 .explorer-modal {
@@ -119,4 +104,108 @@
 
 .explorer-bottom > button:nth-child(3) {
 	margin-left: 5px;
+}
+
+/* Explorer modal */
+.explorer-modal {
+	padding: 0px;
+}
+
+.modal-header {
+	width: calc(100% - 20px);
+	height: auto;
+	background-color: rgb(221, 224, 240);
+	color: #000;
+	display: inline-block;
+	border-radius: 5px 5px 0px 0px;
+	padding: 0px 0px 20px 20px;
+}
+
+.modal-header > h1 {
+	font-size: 30px;
+	margin-block-end: 0px;
+}
+
+.modal-header > span {
+	font-size: 15px;
+}
+
+.modal-content {
+	padding: 20px;
+}
+
+.modal-actions {
+	width: 100%;
+	height: 50px;
+}
+
+.modal-actions > button {
+	width: 100%;
+	height: 100%;
+	border-radius: 0px 0px 5px 5px;
+	font-size: 15px;
+	background-color: rgb(201, 201, 201);
+	border-color: rgb(209, 209, 209);
+	transition: 150ms ease-in-out;
+}
+
+.modal-actions > button:hover {
+	background-color: rgb(182, 182, 182);
+}
+
+/* Create file modal */
+.create-file-modal > input {
+	width: 100%;
+	display: inline-block;
+	height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding-left: 5px;
+	font-size: 15px;
+}
+
+.create-file-modal > input:focus {
+	outline:0;
+}
+
+/* Upload file modal */
+.upload-file-modal > section {
+	border-radius: 5px;
+	border: 2px dashed rgb(165, 168, 185);
+	text-align: center;
+	transition: 150ms ease-in-out;
+	cursor: pointer;
+	background-color: rgb(240, 242, 247);
+	height: 200px;
+}
+
+.upload-file-modal > section:hover {
+	opacity: 0.6;
+}
+
+.upload-file-modal > section > div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.upload-file-modal > section > div > h2 {
+	font-size: 20px;
+	line-height: 0px;
+}
+
+.upload-file-modal > section > div > img {
+	height: 65px;
+}
+
+.upload-file-modal > section > div > i {
+	font-size: 50px;
+}
+
+.upload-file-modal > section:focus {
+	outline: 0;
+}
+
+.upload-file-modal > section > div:focus {
+	outline: 0;
 }

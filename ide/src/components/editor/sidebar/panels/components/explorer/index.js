@@ -5,6 +5,9 @@ import Modal from 'react-responsive-modal';
 
 // Import modals
 import CreateFile from './modals/CreateFile';
+import UploadFile from './modals/UploadFile';
+import GistSaveAll from './modals/GistSaveAll';
+import DeleteFile from './modals/DeleteFile';
 
 // TODO: Fix open on click
 
@@ -22,19 +25,25 @@ class Explorer extends React.Component {
 	}
 
 	// Open modal
-	openModal() {
-		this.setState({ modalOpen: true})
+	openModal(num) {
+		this.setState({ modalOpen: true, modalContent: num })
 	}
 
 	// Close modal
 	closeModal() {
-		this.setState({ modalOpen: false, modalContent: 0 })
+		this.setState({ modalOpen: false })
 	}
 
 	// Dynamically render modal content
 	renderModal() {
 		if (this.state.modalContent === 0) {
 			return <CreateFile closeModal={this.closeModal}/>
+		} else if (this.state.modalContent === 1) {
+			return <UploadFile closeModal={this.closeModal}/>
+		} else if (this.state.modalContent === 2) {
+			return <GistSaveAll closeModal={this.closeModal} />
+		} else if (this.state.modalContent === 3) {
+			return <DeleteFile closeModal={this.closeModal}/>
 		}
 	}
 	render() {
@@ -45,14 +54,14 @@ class Explorer extends React.Component {
 				<div className="explorer">
 					{/* For each file in files, render an ExplorerItem */}
 					{store.get('files').map(function(d, idx) {
-						return <ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown}/>
+						return <ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown} delete={() => this.openModal()}/>
 					})}
 				</div>
 				{/* Create File Button */}
 				<div className="explorer-bottom">
-					<CreateFileButton onClick={this.openModal}/>
-					<LocalFileButton />
-					<SaveAllGistButton />
+					<CreateFileButton onClick={() => this.openModal(0)}/>
+					<LocalFileButton onClick={() => this.openModal(1)}/>
+					<SaveAllGistButton onClick={() => this.openModal(2)}/>
 				</div>
 				{/* Render modal */}
 				<Modal 
@@ -98,6 +107,7 @@ class ExplorerItem extends React.Component {
 				return !item["shown"] === false
 			})
 
+			// FIXME: Matching by name breaks if files have identical names.
 			// Find name of this item in new filtered array, tab position, and set to focus.
 			store.get('tabMgmt')[0] = tempFilter.findIndex(x => x.name === this.props.name);
 			store.set('tabMgmt')(store.get('tabMgmt'))
@@ -117,10 +127,6 @@ class ExplorerItem extends React.Component {
 				<div>
 					<span>{this.props.name}<span className="explorer-item-status">{this.props.isShown ? ' (open)' : ''}</span></span>
 				</div>
-				<div>
-					<button><i className="fa fa-trash"></i></button>
-					<button><i className="fa fa-save"></i></button>
-				</div>
 			</div>
 		);
 	}
@@ -139,7 +145,7 @@ class CreateFileButton extends React.Component {
 class LocalFileButton extends React.Component {
 	render() {
 		return(
-			<button className="button-blue">
+			<button onClick={this.props.onClick} className="button-blue">
 				<span>Upload file</span>
 			</button>
 		)
@@ -149,8 +155,8 @@ class LocalFileButton extends React.Component {
 class SaveAllGistButton extends React.Component {
 	render() {
 		return(
-			<button className="button-blue">
-				<span>Gist save all</span>
+			<button onClick={this.props.onClick} className="button-blue">
+				<span>Gist save files</span>
 			</button>
 		)
 	}

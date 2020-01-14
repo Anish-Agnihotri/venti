@@ -15,12 +15,19 @@ class CreateFile extends React.Component {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 	updateName(evt) {
+		let val = evt.target.value;
+
 		this.setState({
-			name: evt.target.value
+			name: val
 		})
 	}
 	onSubmit() {
-		this.props.store.get('files').push({"name": this.state.name, "code": "", "shown": true});
+		var name = this.state.name;
+		if (!name.endsWith(".sol")) {
+			name += ".sol"
+		}
+
+		this.props.store.get('files').push({"name": name, "code": "", "shown": true});
 		this.props.store.set('files')(this.props.store.get('files'));
 
 		this.props.store.get('tabMgmt')[0] += 1;
@@ -29,10 +36,17 @@ class CreateFile extends React.Component {
 	}
 	render() {
 		return(
-			<div>
-				<h1>Create File</h1>
-				<input placeholder="File name" value={this.state.name} onChange={this.updateName}/>
-				<button onClick={this.onSubmit}>Create</button>
+			<div className="modal-outer">
+				<div className="modal-header">
+					<h1>Create new file</h1>
+					<span>Quickly generate a new Solidity file.</span>
+				</div>
+				<div className="modal-content create-file-modal">
+					<input placeholder="myAwesomeERC20token.sol" value={this.state.name} onChange={this.updateName}/>
+				</div>
+				<div className="modal-actions create-file-actions">
+					<button onClick={this.onSubmit}>Create</button>
+				</div>
 			</div>
 		)
 	}
