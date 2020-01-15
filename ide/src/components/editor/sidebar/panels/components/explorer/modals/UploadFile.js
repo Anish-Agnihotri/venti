@@ -19,27 +19,24 @@ class UploadFile extends React.Component {
 	}
 	// TODO: Reject non .sol files
 	handleUpload(file) {
-		// Change string, loading
-		const upload = file[0];
+		file.forEach((file) => {
+			if (file.name.split('.').pop().toLowerCase() === "sol") {
+				const upload = file;
+				let fileName = upload.name;
 
-		// If file name ends with sol
-		if (upload.name.split('.').pop().toLowerCase() === "sol") {
-			let fileName = upload.name
+				this.setState({
+					uploadString: fileName,
+					isLoading: true,
+					isError: false
+				})
 
-			// If filename already exists, add a -1
-			for (let i = 0; i < this.props.store.get('files').length; i++) {
-				if (fileName === this.props.store.get('files')[i]["name"]) {
-					fileName = fileName.substr(0, fileName.indexOf('.')) + "-1.sol";
+				// If filename already exists, add a -1
+				for (let i = 0; i < this.props.store.get('files').length; i++) {
+					if (fileName === this.props.store.get('files')[i]["name"]) {
+						fileName = fileName.substr(0, fileName.indexOf('.')) + "-1.sol";
+					}
 				}
-			}
 
-			this.setState({
-				uploadString: fileName,
-				isLoading: true,
-				isError: false
-			})
-
-			file.forEach((file) => {
 				const reader = new FileReader()
 				reader.readAsText(file)
 				reader.onload = () => {
@@ -52,13 +49,13 @@ class UploadFile extends React.Component {
 					this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 					this.props.closeModal();
 				}
-			})
-		} else { // If non .sol file:
-			this.setState({
-				uploadString: "Error: Not a .sol file",
-				isError: true
-			})
-		}
+			} else {
+				this.setState({
+					uploadString: "Error: Not a .sol file",
+					isError: true
+				})
+			}
+		});
 	}
 	render() {
 		return(

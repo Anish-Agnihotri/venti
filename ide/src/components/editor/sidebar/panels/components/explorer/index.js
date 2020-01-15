@@ -3,14 +3,17 @@ import './index.css';
 import Store from '../../../../../../stores/files';
 import Modal from 'react-responsive-modal';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import FileSaver from "file-saver";
 
 // Import modals
 import CreateFile from './modals/CreateFile';
 import UploadFile from './modals/UploadFile';
 import GistSaveAll from './modals/GistSaveAll';
 import DeleteFile from './modals/DeleteFile';
+import RenameFile from './modals/RenameFile';
 
 // TODO: Fix open on click
+// TODO: Refactor find logic loops
 
 class Explorer extends React.Component {
 	constructor() {
@@ -25,6 +28,7 @@ class Explorer extends React.Component {
 		this.closeModal = this.closeModal.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 		this.duplicateFile = this.duplicateFile.bind(this);
+		this.downloadFile = this.downloadFile.bind(this);
 	}
 
 	// Open modal
@@ -47,18 +51,23 @@ class Explorer extends React.Component {
 			return <GistSaveAll closeModal={this.closeModal}/>
 		} else if (this.state.modalContent === 3) {
 			return <DeleteFile closeModal={this.closeModal} fileToDelete={this.state.fileToDelete}/>
+		} else if (this.state.modalContent === 4) {
+			return <RenameFile closeModal={this.closeModal} fileToRename={this.state.fileToRename}/>
 		}
 	}
 
 	// Handle right-click menu clicks;
 	handleClick(e, data) {
 		if (data.action === 'Rename') {
-
+			this.setState({ fileToRename: data.name })
+			this.openModal(4)
 		} else if (data.action === 'Delete') {
 			this.setState({ fileToDelete: data.name })
 			this.openModal(3)
 		} else if (data.action === 'Duplicate') {
 			this.duplicateFile(data.name)
+		} else if (data.action === 'Download') {
+			this.downloadFile(data.name)
 		}
 	}
 
@@ -82,6 +91,12 @@ class Explorer extends React.Component {
 		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 	}
 
+	downloadFile(name) {
+		let downloadIndex = this.props.store.get('files').findIndex(x => x.name === name);
+		var blob = new Blob([this.props.store.get('files')[downloadIndex]["code"]], {type: "text/plain;charset=utf-8"});
+		FileSaver.saveAs(blob, name)
+	}
+
 	render() {
 		let store = this.props.store; // Setup easy access to store
 
@@ -94,6 +109,7 @@ class Explorer extends React.Component {
 							<ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown} delete={() => this.openModal()}/>
 						)
 					})}
+					{/* Display an empty create if empty */}
 				</div>
 				{/* Create File Button */}
 				<div className="explorer-bottom">
