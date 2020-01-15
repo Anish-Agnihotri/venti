@@ -28,8 +28,8 @@
 	display: none;
 }
 
-.react-tabs__tab-list {
-	padding: 0px !important;
+.react-tabs__tab--selected::after {
+	height: 0px !important;
 }
 
 .selected-tab {

@@ -18,11 +18,12 @@ class Explorer extends React.Component {
 
 		this.state = {
 			modalOpen: false, // Default position of modal opened to false
-			modalContent: 0 // Default dynamically rendered modal content to 0
+			modalContent: 0 // Default dynamically rendered modal content to 0,
 		}
 
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	// Open modal
@@ -42,15 +43,23 @@ class Explorer extends React.Component {
 		} else if (this.state.modalContent === 1) {
 			return <UploadFile closeModal={this.closeModal}/>
 		} else if (this.state.modalContent === 2) {
-			return <GistSaveAll closeModal={this.closeModal} />
+			return <GistSaveAll closeModal={this.closeModal}/>
 		} else if (this.state.modalContent === 3) {
-			return <DeleteFile closeModal={this.closeModal}/>
+			return <DeleteFile closeModal={this.closeModal} fileToDelete={this.state.fileToDelete}/>
 		}
 	}
+
+	// Handle right-click menu clicks;
+	handleClick(e, data) {
+		if (data.action === 'Rename') {
+
+		} else if (data.action === 'Delete') {
+			this.setState({ fileToDelete: data.name })
+			this.openModal(3)
+		}
+	}
+
 	render() {
-		function handleClick(e, data) {
-			console.log(data.foo);
-		}	
 		let store = this.props.store; // Setup easy access to store
 
 		return(
@@ -83,8 +92,9 @@ class Explorer extends React.Component {
 					{this.renderModal()}
 				</Modal>
 				<ContextMenu id="explorer-menu">
-					<MenuItem data={{ action: 'Rename' }} onClick={handleClick}>Rename</MenuItem>
-					<MenuItem data={{ action: 'Delete' }} onClick={handleClick}>Delete</MenuItem>
+					<MenuItem data={{ action: 'Rename' }} onClick={this.handleClick}>Rename</MenuItem>
+					<MenuItem data={{ action: 'Save' }} onClick={this.handleClick}>Save local</MenuItem>
+					<MenuItem data={{ action: 'Delete' }} onClick={this.handleClick}>Delete</MenuItem>
 				</ContextMenu>
 			</div>
 		)
@@ -131,8 +141,11 @@ class ExplorerItem extends React.Component {
 	}
 
 	render(props) {
+		function collect(props) {
+			return { name: props.name };
+		}
 		return(
-			<ContextMenuTrigger id="some_unique_identifier">
+			<ContextMenuTrigger id="explorer-menu" name={this.props.name} collect={collect}>
 				<div className="explorer-item" onClick={this.selectItem}>
 					<div>
 						<span><span className="truncateable">{this.props.name}</span><span className="explorer-item-status">{this.props.isShown ? ' (open)' : ''}</span></span>
