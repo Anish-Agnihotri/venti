@@ -24,6 +24,7 @@ class Explorer extends React.Component {
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.duplicateFile = this.duplicateFile.bind(this);
 	}
 
 	// Open modal
@@ -56,7 +57,29 @@ class Explorer extends React.Component {
 		} else if (data.action === 'Delete') {
 			this.setState({ fileToDelete: data.name })
 			this.openModal(3)
+		} else if (data.action === 'Duplicate') {
+			this.duplicateFile(data.name)
 		}
+	}
+
+	// Duplicate file (check for name first)
+	duplicateFile(name) {
+		let occurences = 0
+		let copyIndex = 0
+
+		for (let i = 0; i < this.props.store.get('files').length; i++) {
+			if (this.props.store.get('files')[i]["name"].includes(name.slice(0, -4))) {
+				occurences++
+			} else if (this.props.store.get('files')[i]["name"] === name) {
+				copyIndex = i
+			}
+		}
+
+		this.props.store.get('files').push({"name": `${name.slice(0, -4)}-${occurences}.sol`, "code": this.props.store.get('files')[copyIndex]["code"], "shown": true})
+		this.props.store.set('files')(this.props.store.get('files'))
+
+		this.props.store.get('tabMgmt')[0] += 1
+		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 	}
 
 	render() {
@@ -93,7 +116,8 @@ class Explorer extends React.Component {
 				</Modal>
 				<ContextMenu id="explorer-menu">
 					<MenuItem data={{ action: 'Rename' }} onClick={this.handleClick}>Rename</MenuItem>
-					<MenuItem data={{ action: 'Save' }} onClick={this.handleClick}>Save local</MenuItem>
+					<MenuItem data={{ action: 'Duplicate' }} onClick={this.handleClick}>Duplicate</MenuItem>
+					<MenuItem data={{ action: 'Download' }} onClick={this.handleClick}>Download</MenuItem>
 					<MenuItem data={{ action: 'Delete' }} onClick={this.handleClick}>Delete</MenuItem>
 				</ContextMenu>
 			</div>
