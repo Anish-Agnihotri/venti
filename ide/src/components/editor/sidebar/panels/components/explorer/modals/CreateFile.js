@@ -8,7 +8,9 @@ class CreateFile extends React.Component {
 		super();
 
 		this.state = {
-			name: ''
+			name: '',
+			names: [],
+			isDisabledSubmit: true
 		};
 
 		this.updateName = this.updateName.bind(this);
@@ -20,19 +22,35 @@ class CreateFile extends React.Component {
 		this.setState({
 			name: val
 		})
+
+		if (val === '') {
+			this.setState({ isDisabledSubmit: true, disabledViaDuplicate: false })
+		} else if (this.state.names.indexOf(val) !== -1 || this.state.names.indexOf(val + ".sol") !== -1) {
+			this.setState({ isDisabledSubmit: true, disabledViaDuplicate: true })
+		} else {
+			this.setState({ isDisabledSubmit: false, disabledViaDuplicate: false })
+		}
 	}
 	onSubmit() {
 		var name = this.state.name;
+
 		if (!name.endsWith(".sol")) {
 			name += ".sol"
 		}
 
-		this.props.store.get('files').push({"name": name, "code": "", "shown": true});
-		this.props.store.set('files')(this.props.store.get('files'));
+		if (!this.state.isDisabledSubmit) {
+			this.props.store.get('files').push({"name": name, "code": "", "shown": true});
+			this.props.store.set('files')(this.props.store.get('files'));
 
-		this.props.store.get('tabMgmt')[0] += 1;
-		this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
-		this.props.closeModal();
+			this.props.store.get('tabMgmt')[0] += 1;
+			this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
+			this.props.closeModal();
+		}
+	}
+	componentDidMount() {
+		for (let i = 0; i < this.props.store.get('files').length; i++) {
+			this.state.names.push(this.props.store.get('files')[i]["name"])
+		}
 	}
 	render() {
 		return(
@@ -42,10 +60,11 @@ class CreateFile extends React.Component {
 					<span>Quickly generate a new Solidity file.</span>
 				</div>
 				<div className="modal-content create-file-modal">
-					<input placeholder="myAwesomeERC20token.sol" value={this.state.name} onChange={this.updateName}/>
+					<input placeholder="myAwesomeERC20token.sol" value={this.state.name} onChange={this.updateName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}}/>
+					{this.state.disabledViaDuplicate ? <p className="duplicate-error">File already exists.</p> : ''}
 				</div>
 				<div className="modal-actions create-file-actions">
-					<button onClick={this.onSubmit}>Create</button>
+					{this.state.isDisabledSubmit ? <button onClick={this.onSubmit} disabled>Please enter filename</button> : <button onClick={this.onSubmit}>Create</button>}
 				</div>
 			</div>
 		)

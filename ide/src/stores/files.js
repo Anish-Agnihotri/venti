@@ -1,6 +1,8 @@
 // Import createConnectedStore to create undux store.
 import { createConnectedStore } from 'undux';
 
+// TODO: Setup persistance 
+
 // Create files store
 export default createConnectedStore({
 	// Files stores all existing file names, code, shown switch, and col/row number of cursor

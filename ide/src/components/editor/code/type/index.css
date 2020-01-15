@@ -10,6 +10,10 @@
 	font-family: 'Source Code Pro', monospace;
 }
 
+.ace_selection {
+	background-color: #61657e !important;
+}
+
 .type > div:nth-child(2) {
 	height: 30px;
 	width: calc(100% - 20px);

@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css';
 import Store from '../../../../../../stores/files';
 import Modal from 'react-responsive-modal';
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 
 // Import modals
 import CreateFile from './modals/CreateFile';
@@ -47,6 +48,9 @@ class Explorer extends React.Component {
 		}
 	}
 	render() {
+		function handleClick(e, data) {
+			console.log(data.foo);
+		}	
 		let store = this.props.store; // Setup easy access to store
 
 		return(
@@ -54,7 +58,9 @@ class Explorer extends React.Component {
 				<div className="explorer">
 					{/* For each file in files, render an ExplorerItem */}
 					{store.get('files').map(function(d, idx) {
-						return <ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown} delete={() => this.openModal()}/>
+						return (
+							<ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown} delete={() => this.openModal()}/>
+						)
 					})}
 				</div>
 				{/* Create File Button */}
@@ -76,7 +82,10 @@ class Explorer extends React.Component {
 					{/* Dynamically render modal content */}
 					{this.renderModal()}
 				</Modal>
-
+				<ContextMenu id="explorer-menu">
+					<MenuItem data={{ action: 'Rename' }} onClick={handleClick}>Rename</MenuItem>
+					<MenuItem data={{ action: 'Delete' }} onClick={handleClick}>Delete</MenuItem>
+				</ContextMenu>
 			</div>
 		)
 	}
@@ -123,11 +132,13 @@ class ExplorerItem extends React.Component {
 
 	render(props) {
 		return(
-			<div className="explorer-item" onClick={this.selectItem}>
-				<div>
-					<span>{this.props.name}<span className="explorer-item-status">{this.props.isShown ? ' (open)' : ''}</span></span>
+			<ContextMenuTrigger id="some_unique_identifier">
+				<div className="explorer-item" onClick={this.selectItem}>
+					<div>
+						<span><span className="truncateable">{this.props.name}</span><span className="explorer-item-status">{this.props.isShown ? ' (open)' : ''}</span></span>
+					</div>
 				</div>
-			</div>
+			</ContextMenuTrigger>
 		);
 	}
 }

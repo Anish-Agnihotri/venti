@@ -5,12 +5,12 @@
 	height: 100vh;
 }
 
-.layout-code > ul {
+.layout-code > div > ul {
 	border-bottom: 1px solid rgb(62, 68, 85);
 	margin-bottom: 0px;
 }
 
-.layout-code > ul > li {
+.layout-code > div > ul > li {
 	border-radius: 0px;
 	border: none;
 	bottom: 0px;
@@ -18,11 +18,25 @@
 	padding: 6px 20px 6px 20px;
 }
 
+/* Horizontal scrolling */
+.scrollable {
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.scrollable::-webkit-scrollbar {
+	display: none;
+}
+
+.react-tabs__tab-list {
+	padding: 0px !important;
+}
+
 .selected-tab {
 	background-color: rgb(62, 68, 85) !important;
 }
 
-.layout-code > div {
+.layout-code > div > div {
 	height: calc(100vh - 33px);
 }
 

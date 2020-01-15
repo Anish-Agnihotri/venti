@@ -36,19 +36,21 @@ class Code extends React.Component {
 
 		return(
 			<Tabs className="layout-code" selectedIndex={store.get('tabMgmt')[0]} onSelect={tabIndex => updateIndex(tabIndex)}>
-				<TabList>
-					{store.get('files').map(function(d, idx) {
-						if (d.shown === true) {
-							return (
-								<Tab key={idx}>
-									{d.name}
-									<button className="tab-button" onClick={() => closeTab(idx)}><i className="fa fa-close"></i></button>
-								</Tab>
-							)
-						}
-						return null;
-					})}
-				</TabList>
+				<div className="scrollable">
+					<TabList>
+						{store.get('files').map(function(d, idx) {
+							if (d.shown === true) {
+								return (
+									<Tab key={idx}>
+										{d.name}
+										<button className="tab-button" onClick={() => closeTab(idx)}><i className="fa fa-close"></i></button>
+									</Tab>
+								)
+							}
+							return null;
+						})}
+					</TabList>
+				</div>
 				{store.get('files').map(function(d, idx) {
 					if (d.shown === true) {
 						return (
