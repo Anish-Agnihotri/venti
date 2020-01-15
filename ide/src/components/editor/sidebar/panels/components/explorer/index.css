@@ -190,6 +190,7 @@
 	transition: 100ms ease-in-out;
 	user-select: none;
 	cursor: pointer;
+	font-size: 15px;
 }
 
 .react-contextmenu-item:first-child {
@@ -288,4 +289,11 @@
 }
 .delete-file-modal > span:nth-child(2) {
 	margin-block-start: 20px;
+}
+
+/* Rename file modal */
+.rename-file-name {
+	background-color: rgb(182, 190, 243);
+	padding: 2px 3px 2px 3px;
+	border-radius: 5px;
 }

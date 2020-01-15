@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 
 // Import Venti logo
-import logo from './logo.svg';
+import logo from './logo.png';
 
 // Import sidebar buttons
 import solidity from './images/solidity.png';
