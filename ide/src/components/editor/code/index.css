@@ -58,3 +58,37 @@
 	text-align: left;
 	padding: 6px 10px 6px 15px !important;
 }
+
+/* No file sections */
+.no-files {
+	background-color: rgb(72, 80, 102);
+	border-radius: 5px;
+	display: inline-block;
+	padding: 20px 30px 20px 30px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: calc(50% + 185px);
+	transform: translate(-50%, -50%);
+	margin: auto;
+}
+
+.no-files > h1 {
+	font-size: 22px;
+	margin-block-start: 0px;
+	margin-block-end: 0px;
+	color: rgb(191, 201, 231);
+}
+
+.no-files > p {
+	margin-block-start: 2.5px;
+	color: rgb(134, 147, 185);
+}
+
+.no-files > button {
+	width: 100%;
+	height: 45px;
+	border-radius: 5px;
+	font-size: 15px;
+	transition: 100ms ease-in-out;
+}

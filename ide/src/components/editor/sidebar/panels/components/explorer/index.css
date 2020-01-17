@@ -13,13 +13,13 @@
 	-moz-box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.1);
 	box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.1);
 	margin-top: 10px;
-	max-height: calc(100% - 65px);
-	overflow-y: initial;
+	max-height: calc(100% - 95px);
+	overflow-y: auto;
 
 }
 
 .explorer-item {
-	height: 49px;
+	height: 39px;
 	transition: 100ms ease-in-out;
 	border-bottom: 1px solid #ccc;
 }
@@ -40,6 +40,8 @@
 .explorer-item-status {
 	color: rgb(175, 175, 175);
 	font-weight: 400;
+	display: inline-block;
+	transform: translateY(1px);
 }
 
 .explorer-item > div {
@@ -53,9 +55,18 @@
 	color: #1416F6;
 	font-weight: 600;
 	font-size: 15px;
-	margin-top: 15px;
+	margin-top: 8px;
 	display: inline-block;
 	user-select: none;
+}
+
+.explorer-tip {
+	display: inline-block;
+	font-size: 12.5px;
+	text-align: center;
+	width: 100%;
+	color: rgb(109, 109, 109);
+	margin-top: 6.5px;
 }
 
 .truncateable {
@@ -172,6 +183,24 @@
 
 .modal-content > input:focus {
 	outline:0;
+}
+
+/* No file fallback */
+.explorer-empty {
+	padding: 20px;
+	text-align: center;
+}
+
+.explorer-empty > h3 {
+	margin-block-start: 0px;
+}
+
+.explorer-empty > p {
+	margin-block-start: -15px;
+}
+
+.explorer-empty > button {
+	width: 100%;
 }
 
 /* React content modal */

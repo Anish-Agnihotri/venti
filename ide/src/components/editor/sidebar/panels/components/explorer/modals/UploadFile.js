@@ -41,7 +41,7 @@ class UploadFile extends React.Component {
 				reader.readAsText(file)
 				reader.onload = () => {
 					const code = reader.result
-					
+
 					this.props.store.get('files').push({"name": fileName, "code": code, "shown": true});
 					this.props.store.set('files')(this.props.store.get('files'));
 

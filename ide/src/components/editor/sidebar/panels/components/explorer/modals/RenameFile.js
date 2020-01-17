@@ -59,7 +59,7 @@ class RenameFile extends React.Component {
 					<span>Quickly rename <span className='rename-file-name'>{this.props.fileToRename}</span>.</span>
 				</div>
 				<div className="modal-content rename-file-modal">
-					<input placeholder={"myFancyNewName.sol"} value={this.state.renameName} onChange={this.renameName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}}/>
+					<input placeholder={"myFancyNewName.sol"} value={this.state.renameName} onChange={this.renameName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}} autoFocus/>
 					{this.state.disabledViaDuplicate ? <p className="duplicate-error">File already exists.</p> : ''}
 				</div>
 				<div className="modal-actions rename-file-actions">

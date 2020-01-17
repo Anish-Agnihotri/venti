@@ -66,7 +66,7 @@ class DeleteFile extends React.Component {
 						readOnly={true}
 					/>
 					<p>Type file name to continue:</p>
-					<input placeholder={this.props.fileToDelete} value={this.state.deleteName} onChange={this.updateDeleteName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}}/>
+					<input placeholder={this.props.fileToDelete} value={this.state.deleteName} onChange={this.updateDeleteName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}} autoFocus/>
 				</div>
 				<div className="modal-actions delete-file-actions">
 					{this.state.isDisabledSubmit ? <button onClick={this.onSubmit} disabled>Please confirm deletion</button> : <button onClick={this.onSubmit}>Delete</button>}

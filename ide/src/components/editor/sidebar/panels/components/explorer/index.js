@@ -110,7 +110,9 @@ class Explorer extends React.Component {
 						)
 					})}
 					{/* Display an empty create if empty */}
+					{store.get('files').length === 0 ? <EmptyExplorer onClick={() => this.openModal(0)}/> : ''}
 				</div>
+				<p className="explorer-tip">Tip: Right-click on files for additional options.</p>
 				{/* Create File Button */}
 				<div className="explorer-bottom">
 					<CreateFileButton onClick={() => this.openModal(0)}/>
@@ -222,6 +224,18 @@ class SaveAllGistButton extends React.Component {
 			<button onClick={this.props.onClick} className="button-blue">
 				<span>Gist save files</span>
 			</button>
+		)
+	}
+}
+
+class EmptyExplorer extends React.Component {
+	render() {
+		return(
+			<div className='explorer-empty'>
+				<h3>Uh oh! No files found.</h3>
+				<p>Get started by creating a file:</p>
+				<CreateFileButton onClick={this.props.onClick} />
+			</div>
 		)
 	}
 }

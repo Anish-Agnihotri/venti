@@ -60,7 +60,7 @@ class CreateFile extends React.Component {
 					<span>Quickly generate a new Solidity file.</span>
 				</div>
 				<div className="modal-content create-file-modal">
-					<input placeholder="myAwesomeERC20token.sol" value={this.state.name} onChange={this.updateName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}}/>
+					<input placeholder="myAwesomeERC20token.sol" value={this.state.name} onChange={this.updateName} onKeyDown={event => { if (event.key === 'Enter') {this.onSubmit()}}} autoFocus/>
 					{this.state.disabledViaDuplicate ? <p className="duplicate-error">File already exists.</p> : ''}
 				</div>
 				<div className="modal-actions create-file-actions">
