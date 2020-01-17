@@ -1,13 +1,14 @@
 <p align="center">
-	<img src="https://i.imgur.com/zumjNkW.png" height="100" />
+	<img src="https://i.imgur.com/B6GFWYF.png" height="150" />
 </p>
-<p>**⚠️ Warning: Venti is currently a Work-In-Progress (WIP), as a hobby project of [@anish-agnihotri](https://github.com/anish-agnihotri). Until first stable version, project may not be buildable or feature-complete.**</p>
+
+**:warning:Warning: Venti is currently a Work-In-Progress (WIP), as a hobby project of [@anish-agnihotri](https://github.com/anish-agnihotri). Until first stable release, project may not be buildable or feature-complete.**</p>
 
 Venti is the *hip* browser-only Ethereum IDE and runtime environment for Solidity + Vyper. It's exposes a minimalist user interface with the aim of being clean, simple, and comfortable for developers (*especially*, those new to blockchain).
 
 Venti is written completely in JavaScript and is extremely efficient. It's lightweight and can be installed with a few commands on *any* environment (Docker support soon).
 
-Functionality is largely built with the mind-set of expanding [Remix](http://remix.ethereum.org) while optimizing core functionalities for ease-of-use and simplicity.
+Functionality is built with the mind-set of expanding [Remix](http://remix.ethereum.org) while optimizing core functionalities for ease and simplicity.
 
 ![screenshot](https://i.imgur.com/ocHxezZ.png)
 
