@@ -41,6 +41,7 @@ class DeleteFile extends React.Component {
 			this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 			this.props.closeModal();
 		}
+		this.setState({ isDisabledSubmit: true })
 	}
 	componentDidMount() {
 		let fileIndex = this.props.store.get('files').findIndex(x => x.name === this.props.fileToDelete);

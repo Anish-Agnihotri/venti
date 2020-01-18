@@ -45,6 +45,7 @@ class RenameFile extends React.Component {
 
 			this.props.closeModal();
 		}
+		this.setState({ isDisabledSubmit: true })
 	}
 	componentDidMount() {
 		for (let i = 0; i < this.props.store.get('files').length; i++) {

@@ -41,13 +41,13 @@
 }
 
 .tab-button {
-	margin-left: 10px;
 	background-color: rgb(70, 77, 95);
 	border: none;
 	padding: 1px 4px 1.5px 4px;
 	border-radius: 50%;
-	transform: translateY(-0.5px);
+	transform: translateY(2.5px);
 	transition: 100ms ease-in-out;
+	float: right;
 }
 
 .tab-button:hover {
@@ -56,7 +56,17 @@
 
 .react-tabs__tab {
 	text-align: left;
-	padding: 6px 10px 6px 15px !important;
+	padding: 6px 10px 3px 15px !important;
+	width: 125px;
+}
+
+.react-tabs__tab > span {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 100px;
+	display: inline-block;
+	margin-block-end: 0px;
 }
 
 /* No file sections */
@@ -91,4 +101,44 @@
 	border-radius: 5px;
 	font-size: 15px;
 	transition: 100ms ease-in-out;
+}
+
+/* FIXME: on small resolutions overlapping sidebar */
+
+.no-files > div {
+	height: auto !important;
+	background-color: rgb(144, 155, 185);
+	border-radius: 5px;
+	width: 25vw;
+	max-height: 200px;
+	overflow-y: auto;
+}
+
+.file-item {
+	height: 39px;
+	display: inline-block;
+	width: 100%;
+	text-align: left;
+	transition: 100ms ease-in-out;
+	border-bottom: 1px solid rgb(116, 123, 143);
+}
+
+.file-item:first-child {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.file-item:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom: none !important;
+}
+
+.file-item:hover {
+	background-color: rgb(196, 204, 224);
+}
+
+.file-item > span {
+	display: inline-block;
+	padding: 8px 0px 0px 10px;
 }

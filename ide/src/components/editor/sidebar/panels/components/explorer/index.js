@@ -106,7 +106,7 @@ class Explorer extends React.Component {
 					{/* For each file in files, render an ExplorerItem */}
 					{store.get('files').map(function(d, idx) {
 						return (
-							<ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown} delete={() => this.openModal()}/>
+							<ExplorerItem key={idx} position={idx} name={d.name} store={store} isShown={d.shown}/>
 						)
 					})}
 					{/* Display an empty create if empty */}
@@ -179,6 +179,15 @@ class ExplorerItem extends React.Component {
 
 			store.get('tabMgmt')[0] = tempFilterTwo.findIndex(x => x.name === this.props.name);
 			store.set('tabMgmt')(store.get('tabMgmt'))
+
+			if (store.get('tabMgmt')[0] > 6) {
+				let offset = (store.get('tabMgmt')[0] - 6)*150;
+				store.get('tabMgmt')[1] = offset;
+				store.set('tabMgmt')(store.get('tabMgmt'))
+			} else {
+				store.get('tabMgmt')[1] = 0;
+				store.set('tabMgmt')(store.get('tabMgmt'))
+			}
 		}
 	}
 

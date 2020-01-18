@@ -34,6 +34,7 @@ class CreateFile extends React.Component {
 	onSubmit() {
 		var name = this.state.name;
 
+
 		if (!name.endsWith(".sol")) {
 			name += ".sol"
 		}
@@ -46,6 +47,8 @@ class CreateFile extends React.Component {
 			this.props.store.set('tabMgmt')(this.props.store.get('tabMgmt'))
 			this.props.closeModal();
 		}
+
+		this.setState({ isDisabledSubmit: true })
 	}
 	componentDidMount() {
 		for (let i = 0; i < this.props.store.get('files').length; i++) {

@@ -24,10 +24,19 @@ class Type extends React.Component {
 
 		this.handleCodeChange = this.handleCodeChange.bind(this);
 		this.handleCursorChange = this.handleCursorChange.bind(this);
+		this.handleSessionRestore = this.handleSessionRestore.bind(this);
 	}
 	handleCodeChange(newValue) {
 		this.props.store.get('files')[this.props.position]["code"] = newValue;
 		this.props.store.set('files')(this.props.store.get('files'))
+	}
+	handleSessionRestore() {
+		let row = this.props.store.get('files')[this.props.position]["row"]
+		let col = this.props.store.get('files')[this.props.position]["col"]
+		if (row !== undefined) {
+			this.refs.aceEditor.editor.gotoLine(row, col);
+			this.handleCursorChange();
+		}
 	}
 	handleCursorChange() {
 		var selection = this.refs.aceEditor.editor.getSelectionRange().end;
@@ -37,6 +46,10 @@ class Type extends React.Component {
 		this.props.store.get('files')[this.props.position]["row"] = row + 1;
 		this.props.store.get('files')[this.props.position]["col"] = col;
 		this.props.store.set('files')(this.props.store.get('files'))
+	}
+	componentDidMount() {
+		this.handleSessionRestore();
+		this.refs.aceEditor.editor.focus();
 	}
 	render(props) {
 		let store = this.props.store;
