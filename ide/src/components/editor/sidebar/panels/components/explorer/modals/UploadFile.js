@@ -17,7 +17,7 @@ class UploadFile extends React.Component {
 
 		this.handleUpload = this.handleUpload.bind(this);
 	}
-	// TODO: Reject non .sol files
+
 	handleUpload(file) {
 		file.forEach((file) => {
 			if (file.name.split('.').pop().toLowerCase() === "sol") {

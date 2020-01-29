@@ -29,7 +29,6 @@ class InitModal extends React.Component {
 					<div>
 						<button onClick={() => this.modalOperation(1)}>Create new file</button>
 						<button onClick={() => this.modalOperation(2)}>Upload file</button>
-						{/* TODO: Add restore session functionality */}
 					</div>
 				</div>
 			</div>

@@ -19,6 +19,7 @@
 	width: calc(100% - 10px);
 	display: inline-block;
 	padding-right: 10px;
+	transform: translateY(-1px);
 }
 
 .op-buttons {
@@ -48,6 +49,7 @@
 	display: inline-block;
 	width: 200px;
 	text-align: right;
+	user-select: none;
 }
 
 /* Ace search styling */
