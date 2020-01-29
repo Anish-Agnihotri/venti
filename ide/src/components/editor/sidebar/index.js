@@ -23,14 +23,12 @@ import Settings from './panels/settings';
 import Solidity from './panels/solidity';
 import Transactions from './panels/transactions';
 
-/* TODO: Fix hover effects and icons */
-
 class Sidebar extends React.Component {
 	constructor() {
 		super();
 
 		this.state = {
-			panel: 1 // Setup default panel to display ("Solidity Compiler")
+			panel: 1, // Setup default panel to display ("Solidity Compiler")
 			// FIXME: Change to 2 before production deploy
 		}
 
@@ -60,6 +58,12 @@ class Sidebar extends React.Component {
 		}
 	}
 	render() {
+		// Panel setup
+		const nav = [{"panel": 1, "image": document, "imageblue": documentblue, "alttext": "File explorer"},
+					{"panel": 2, "image": solidity, "imageblue": solidityblue, "alttext": "Solidity compiler"},
+					{"panel": 3, "image": transaction, "imageblue": transactionblue, "alttext": "Send transactions"},
+					{"panel": 4, "image": bug, "imageblue": bugblue, "alttext": "Unit testing"},
+					{"panel": 5, "image": settings, "imageblue": settingsblue, "alttext": "Venti settings"}]
 		return (
 			<div className="layout-sidebar">
 				<div className="layout-nav">
@@ -70,31 +74,16 @@ class Sidebar extends React.Component {
 					</div>
 					<div className="layout-nav-selectors">
 						<ul>
-							<li>
-								<button onClick={(e) => this.updatePanel(1)} className={`${this.state.panel === 1 ? "active" : ""}`}>
-									<img src={`${this.state.panel === 1 ? documentblue : document }`} alt="File explorer"/>
-								</button>
-							</li>
-							<li>
-								<button onClick={(e) => this.updatePanel(2)} className={`${this.state.panel === 2 ? "active" : ""}`}>
-									<img src={`${this.state.panel === 2 ? solidityblue : solidity }`} alt="Solidity compiler"/>
-								</button>
-							</li>
-							<li>
-								<button onClick={(e) => this.updatePanel(3)} className={`${this.state.panel === 3 ? "active" : ""}`}>
-									<img src={`${this.state.panel === 3 ? transactionblue : transaction }`} alt="Send transaction"/>
-								</button>
-							</li>
-							<li>
-								<button onClick={(e) => this.updatePanel(4)} className={`${this.state.panel === 4 ? "active" : ""}`}>
-									<img src={`${this.state.panel === 4 ? bugblue : bug }`} alt="Unit testing"/>
-								</button>
-							</li>
-							<li>
-								<button onClick={(e) => this.updatePanel(5)} className={`${this.state.panel === 5 ? "active" : ""}`}>
-									<img src={`${this.state.panel === 5 ? settingsblue : settings }`} alt="Venti settings"/>
-								</button>
-							</li>
+							{nav.map(function(d, idx) {
+								// For each item in nav, render a sidebar navigation component
+								return(
+									<li>
+										<button onClick={(e) => this.updatePanel(d.panel)} className={`${this.state.panel === d.panel ? "active" : ""}`}>
+											<img src={`${this.state.panel === d.panel ? d.imageblue : d.image }`} alt={d.alttext}/>
+										</button>
+									</li>
+								)
+							}.bind(this))}
 						</ul>
 					</div>
 					<div className="layout-version">

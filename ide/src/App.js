@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 
+// Main editor functionality
 import Editor from './pages/editor';
 
 // Import Undux store

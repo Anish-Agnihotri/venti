@@ -1,5 +1,6 @@
 /* eslint-disable */
-import * as ace from 'brace';
+// Solidity mode for Ace editor
+import * as ace from 'brace'; // Use brace backbone as compatability layer for react-ace
 
 ace.define("ace/mode/solidity_highlight_rules",["require","exports","module","ace/lib/oop","ace/lib/lang","ace/mode/text_highlight_rules"], function(acequire, exports, module) {
 

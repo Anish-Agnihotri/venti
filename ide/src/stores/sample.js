@@ -1,4 +1,5 @@
-export const opensign_test_code = `pragma solidity ^0.4.17;
+// Default opensign_test.sol contract.
+const opensign_test_code = `pragma solidity ^0.4.17;
 
 contract OpenSign{
     struct Document {
@@ -25,3 +26,5 @@ contract OpenSign{
         return documents[keccak256(id)].signatures;
     }
 }`
+
+export const opensign_sol = {"name": "opensign_test.sol", "code": opensign_test_code, "shown": true, "row": 27, "col": 1}

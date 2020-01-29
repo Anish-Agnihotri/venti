@@ -59,6 +59,7 @@ class Editor extends React.Component {
 					onClose={this.closeModal}
 					classNames={{
 						overlay: "init-modal-overlay",
+						// Change the size of modal depending on shown content
 						modal: this.state.modalContent === 0 ? "init-modal" : "explorer-modal"
 					}}
 					center
