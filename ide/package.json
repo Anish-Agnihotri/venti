@@ -17,6 +17,7 @@
     "react-dom": "^16.12.0",
     "react-dropzone": "^10.2.1",
     "react-easy-state": "^6.1.3",
+    "react-github-btn": "^1.1.1",
     "react-responsive-modal": "^4.0.1",
     "react-scripts": "3.3.0",
     "react-scroll": "^1.7.16",
