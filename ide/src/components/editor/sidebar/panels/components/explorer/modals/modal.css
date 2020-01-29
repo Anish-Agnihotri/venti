@@ -1,0 +1,73 @@
+.init-modal {
+	width: 300px;
+	border-radius: 5px;
+	background-color: #EEF0F9;
+	padding: 0px;
+}
+
+.init-modal-outer {
+	text-align: center;
+}
+
+.init-modal-top {
+	display: inline-block;
+	background-color: #EEF0F9;
+	width: calc(100% - 60px);
+	margin: 25px 30px 10px 30px;
+}
+
+.init-modal-top > img {
+	width: 55px;
+}
+
+.init-modal-top > p {
+	margin-block-start: 5px;
+	line-height: 1.5;
+}
+
+.github-star-container {
+	display: inline-block;
+	transform: translateY(-5px);
+}
+
+.init-modal-bottom {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 0px 0px 5px 5px;
+}
+
+.init-modal-bottom > div {
+	width: 100%;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+}
+
+.init-modal-bottom > div > button {
+	width: 100%;
+	height: 40px;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-bottom: 1px solid #ccc;
+	background-color: transparent !important;
+	font-size: 12px;
+	font-weight: 500;
+	transition: 100ms ease-in-out;
+}
+
+.init-modal-bottom > div > button:hover {
+	background-color: rgb(241, 241, 241) !important;
+}
+
+.init-modal-bottom > div > button:first-child {
+	border-radius: 5px 5px 0px 0px;
+}
+
+.init-modal-bottom > div > button:last-child {
+	border-radius: 0px 0px 5px 5px;
+	border-bottom: none;
+}
+
+.init-modal-overlay {
+	background-color: rgba(0, 0, 0, 0.75);
+}

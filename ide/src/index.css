@@ -9,6 +9,10 @@ body {
 	font-family: 'Source Sans Pro', sans-serif; /* Declare global fonts */
 }
 
+html, body {
+	height: 100%;
+}
+
 /* Remove focus from all buttons */
 button:focus {
 	outline:0;
